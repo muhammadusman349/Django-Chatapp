@@ -1,6 +1,42 @@
 {% extends 'main.html' %}
 
 {% block content %}
+
+{% if page == 'login' %}
+<div>
+    <form class="form" action="" method="POST">
+        {% csrf_token %}
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter Username /">
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter Password /">
+        <input type="submit" value="Login"/>
+    </form>
+    <p> havent signed up yet?</p>
+    <a href="{% url 'register'%}">Sign Up</a>
+</div>
+{% else %}
+<div>
+  <form class="form" action="" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" value="Register"/>
+  </form>
+  <p> Already signed up yet?</p>
+  <a href="{% url 'login'%}">Login</a>
+
+</div>
+{% endif %}
+{% endblock content %}
+
+
+
+
+
+
+{% comment %} {% extends 'main.html' %}
+
+{% block content %}
 <main class="auth layout">
 
   {% if page == 'login' %}
@@ -18,7 +54,7 @@
           {% csrf_token %}
           <div class="form__group form__group">
             <label for="room_name">Email</label>
-            <input id="username" name="email" type="email" placeholder="e.g. dennis_ivy@email.com" />
+            <input id="username" name="email" type="email" placeholder="e.g. dennis_ivy@email.com />
           </div>
           <div class=" form__group">
             <label for="password">Password</label>
@@ -87,11 +123,11 @@
 
         <div class="auth__action">
           <p>Already signed up yet?</p>
-          <a href="{% url 'login' %}" class="btn btn--link">Login</a>
+          <a href="{% url 'login' %}" class="btn btn--link">Sign Up</a>
         </div>
       </div>
     </div>
   </div>
   {% endif %}
 </main>
-{% endblock content %}
+{% endblock content %} {% endcomment %}
